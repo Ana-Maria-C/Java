@@ -1,0 +1,6 @@
+Declaram variabila n de tip integer, ce va fi data drept argument la linia de comanda si verificam daca in momentul lansarii aplicatiei se introduce exact un argument pentru variabila n.
+Declaram matricea arr, ale carei elemente sunt de tip intreg, ce va reprezenta patratul latin de la 1 la n.
+Pentru a crea matricea, prima linie va contine toate numerele de la 1 la n, consective, iar urmatoarele linii se for forma printr-o shiftare la dreapa a liniei anterioare, astfel incat pe nicio linie si pe nicio coloana sa nu se gaseasca acelasi numar de doua ori.
+Pentru a afisa stringuri formate din concatenarea elementelor de pe fiecare linie, respectiv coloana, formam numarul corespunzator linie/coloanei, iar cand am terminat de parcurs linia/coloana respectiva, convertim numarul respectiv intr-un string pe care il afisam.
+Daca valoarea numarului n este mai mare de 30.000, vom afisa durata de executie a programului in milisecunde, astfel: startTime= timpul curent al programului, ce va fi initializat inainte de rularea programului; endTime= timpul de finalizare al programului, dupa rulare;
+totalTime= costul de timp efectiv al programului ce se calculeaza: endTime-startTime.
