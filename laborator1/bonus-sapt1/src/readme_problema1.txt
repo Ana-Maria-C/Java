@@ -1,0 +1,3 @@
+Construin matricea grafului astfel:
+stim ca intr-un graf ciclu, fiecare nod este adiacent cu cel de dupa el si cu cel dinaintea lui (mica exceptie la primul nod care este adiacent cu al doilea si cu ultimul si ultimul nod, care este adiacent cu cel anterior lui si primul)
+Tinand cont de aceasta regula, completam graph_matrix, care va reprezenta matricea de adiacenta a grafului, dupa care calculam puterile matricei in matricea A_putere, iar pentru aceasta operatie vom avea nevoie de o matrice auxiliara B, ce va retine puterea anterioara calculata.
