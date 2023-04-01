@@ -1,0 +1,46 @@
+Am creat 4 clase pentru a implementa cerinta:
+
+    CanvasPanel:
+- extinde clasa "Canvas" din biblioteca JavaFX și definește un canvas pe care se poate desena un graf cu puncte si linii;
+-constructorul primește latimea si inaltimea canvas-ului și le seteaza;
+-metoda "drawBoard" deseneaza un graf cu numarul dat de puncte si linii;
+-graficul consta intr-un cerc cu punctele asezate pe circumferinta sa si linii trase intre unele dintre acestea;
+-numarul de linii este limitat la numarul maxim de linii care pot fi trasate intre puncte:n(n-1)/2=nr de muchii al unui graf complet;
+-daca numarul de linii depaseste aceasta limita, se arunca o excepție;
+- pentru a desena liniile, facem o matrice patratica de ordin=numDots;
+-fiecare linie este calculata astfel: se iau doua puncte random, iar daca acestea sunt diferite si nu exista deja linie intre ele(adica pozitia in matrice e 0)
+se adauga linie si se completeaza matricea.
+-la final pentru a desena se parcurge matricea si daca in matrice intre doua puncte este "marcata" muchie, se calculeaza coordonatele nodurilor
+respective si se deseneaza linia , folosind metode gc.strokeLine() a obiectului "GraphicsContext".
+-elementele matricei ce reprezinta liniile (relatia dintre puncte), vor fi definite astfel: -1, linia exista dar este gri(nealeasa de jucatori),
+1-linia este colorata cu rosu, deoarece a fost aleasa deprimul jucator si 2- linia este colorata cu albastru deoarece a fost aleasa de jucatorul 2.
+-este definită functia lambda pentru tratarea evenimentelor de mouse, care raspunde la evenimentele de clic. Aceasta verifica daca click-ul a fost facut pe o 
+linie valida in joc si alege urmatorul jucator;
+- metoda savePicture salveaza o imagine cu starea curenta a jocului in fisierului a carei cale este specificata; aceasta metoda apeleaza metoda saveBytePicture
+care salveaza imaginea intr un fisiere sub tipul unui array de biti(lucra ce va fi de ajutor pentru reconstituirea jocului la
+apelarea metodei load)
+-metoda load, citeste bitii din fisierul unde a fost salvata imaginea de metoda saveBytePicture si resconstyituie starea jocului in functie de aceasta
+
+    ConfigurationPanel
+-este creat un obiect HBox pentru a contine mai multe componente GUI: doua obiecte numite „numDotsLabel” si „numLinesLabel”,
+doua obiecte TextField numite „numDotsInput” si „numLinesInput” pentru a introduce numere, si un obiect Button numit „newGameButton” pentru a declansa un joc nou;
+-componentele GUI sunt adaugate in configPanel folosind „getChildren” si „addAll”.
+-cand apasam „newGameButton” se foloseste metoda „drawBoard” pentru a desena "un graf" corespunzator datelor introduse (pentru linii si noduri).
+
+
+    ControlPanel
+-este creat un obiect HBox numit „controlPanel” cu 3 obiecte: loadButton, saveButton si exitButton, ce vor fi afisate in centu, jos;
+-componentele GUI sunt adaugate in controlPanel folosind „getChildren” si „addAll”
+
+    MainFrame
+-functia start setează interfata grafica folosind GUI pentru un joc simplu;
+-metoda primeste un obiect Stage numit "primaryStage" ca parametru si arunca o exceptie daca apar erori;
+-se definesc trei variabile private pentru panourile: canvas, control si configurare;
+-in metoda start(), se creaza frame-ul principal cu ajutorul clasei BorderPane si se creeazi cele trei panouri cu dimensiuni
+si configurari specifice fiecarui constructor;
+-panoul de configurare si cel de control, primesc ca argument panoul de canvas;
+- panoul canvas primeste ca argument dimensiunile necesare pt a desena canvas ul;
+-aceste trei panouri sunt apoi adaugate în frame-ul principal si se creeaza o scenă cu dimensiunile specificate;
+-in final, scena este setata ca scena principală a obiectului Stage, care este apoi afisat;
+-metoda main() porneste aplicatia prin apelarea metodei launch() din clasa Application cu argumentele din linia de comanda.
+
