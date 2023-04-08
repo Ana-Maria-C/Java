@@ -1,0 +1,44 @@
+Clasa Token
+    -> reprezintă un obiect care conține o valoare de tip int și oferă o metodă getValue() pentru a obține acea valoare.
+
+Clasa Robot
+    -> este implementată ca un fir de execuție (Runnable) și reprezintă un robot care explorează o hartă (ExplorationMap) și extrage token-uri dintr-o
+     memorie partajată (SharedMemory). Robotul începe explorarea dintr-o celulă aleatoare de pe hartă și folosește o stivă (Deque) pentru a ține evidența
+     celulelor neexplorate încă.
+     -> odată ce toate celulele de pe hartă au fost explorate, robotul se oprește.
+     -> utilizează un obiect de tip Lock pentru a bloca accesul concurent la hartă și la memoria partajată.
+     -> conține metode pentru explorarea unei celule, extragerea token-urilor și setarea acestora în celula explorată.
+
+Clasa SharedMemory
+    -> reprezintă memoria partajată și oferă metode pentru extragerea unui număr specific de token-uri din aceasta.
+    -> Memoria partajată este implementată cu ajutorul unei liste de token-uri și este blocată cu un obiect de tip Lock.
+
+Clasa ExplorationMap
+    -> reprezintă harta și oferă metode pentru explorarea celulelor și obținerea/setarea token-urilor pentru o celulă specifică.
+    -> harta este implementată cu ajutorul unui tablou bidimensional de valori de tip boolean pentru a ține evidența celulelor explorate și un tablou
+    bidimensional de liste de token-uri pentru a reține token-urile găsite în fiecare celulă.
+    -> utilizează un obiect de tip Lock pentru a bloca accesul concurent la hartă.
+
+Clasa Exploration:
+    -> Constructorul clasei "Exploration" primește trei argumente: dimensiunea hărții, numărul de roboți și numărul de "token"-uri per celulă.
+    -> În constructor, clasa creează o instanță a hărții de explorare, a memoriei partajate și a listei de obiecte fir de execuție.
+    -> constructorul creează și adaugă un obiect "Robot" pentru fiecare robot în listă și creează un fir de execuție pentru fiecare.
+    -> Metoda "start" inițiază toate firele de execuție din lista "threads", ceea ce permite roboților să înceapă explorarea.
+    -> Metoda "pause" întrerupe toate firele de execuție din lista "threads", ceea ce oprește temporar explorarea.
+    -> Metoda "resume" reia explorarea prin apelarea metodei "start".
+    -> Metoda "getThread" returnează firul de execuție de la indexul specificat din lista "threads".
+
+Clasa ExplorationController:
+    ->este o clasă ce permite controlul explorării hărții de către roboți.
+    -> Aceasta primește ca parametri dimensiunea hărții, numărul de roboți și numărul de token-uri pe celulă și creează o instanță a clasei Exploration.
+    -> Apoi, prin intermediul metodei start(), permite pornirea explorării și afișează un meniu de comenzi (start/pause/resume/quit) pentru a controla
+    explorarea. Dacă se introduc comenzile "start" sau "resume", explorarea este repornită. Dacă se introduce comanda "pause <robotIndex> <pauseTime>",
+    se oprește temporar robotul cu indexul dat, pentru o durată specificată, după care se repornește explorarea.
+    -> Dacă se introduce comanda "quit", explorarea este oprită definitiv.
+
+Clasa Timekeeper:
+    -> implementeaza interfata Runnable si se foloseste pentru a monitoriza timpul scurs de la inceperea explorarii.
+    -> Cand timpul limita specificat in constructor este atins, explorarea este oprita, toate celulele sunt marcate ca explorate si se afiseaza un mesaj
+    corespunzator. In timpul rularii, metoda run() calculeaza timpul scurs, il afiseaza si verifica daca a fost atinsa limita de timp.
+    -> Daca timpul limita a fost atins, metoda seteaza toate celulele ca fiind explorate si iese din bucla infinita.
+    -> Daca nu a fost atinsa limita de timp, metoda asteapta 1 secunda si apoi se reia bucla.
