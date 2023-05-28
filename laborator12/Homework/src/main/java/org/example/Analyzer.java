@@ -24,7 +24,7 @@ public class Analyzer {
     private void analyzeInput(String path) {
         File file = new File(path);
         if (file.isDirectory()) {
-            analyzeClassesInDirectory(file);
+            analyzeClassesInDirectory(file, new CustomClassLoader(file));
         } else if (file.isFile()) {
             String fileName = file.getName();
             if (fileName.endsWith(".jar")) {
@@ -35,7 +35,7 @@ public class Analyzer {
         }
     }
 
-    private void analyzeClassesInDirectory(File directory) {
+    private void analyzeClassesInDirectory(File directory, CustomClassLoader classLoader) {
         File[] files = directory.listFiles();
         if (files != null) {
             for (File file : files) {
@@ -143,5 +143,26 @@ public class Analyzer {
         System.out.println("Statistics:");
         System.out.println("Total classes with @Test annotation: " + totalClasses);
         System.out.println("Total test methods: " + totalTestMethods);
+    }
+
+    static class CustomClassLoader extends ClassLoader {
+        private File baseDir;
+
+        public CustomClassLoader(File baseDir) {
+            this.baseDir = baseDir;
+        }
+
+        public Class<?> loadClass(String className) throws ClassNotFoundException {
+            String fileName = className.replace('.', File.separatorChar) + ".class";
+            File classFile = new File(baseDir, fileName);
+
+            try (FileInputStream fis = new FileInputStream(classFile)) {
+                byte[] classBytes = new byte[(int) classFile.length()];
+                fis.read(classBytes);
+                return defineClass(className, classBytes, 0, classBytes.length);
+            } catch (Exception e) {
+                throw new ClassNotFoundException("Failed to load class: " + className, e);
+            }
+        }
     }
 }
