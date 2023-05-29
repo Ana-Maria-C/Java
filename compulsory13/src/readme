@@ -1,0 +1,27 @@
+Clasa "DisplayLocales"
+    -> are o metodă statică numită "displayAvailableLocales";
+    -> această metodă obține toate localizările disponibile utilizând clasa "Locale" și le afișează pe ecran folosind metoda "println".
+
+Clasa "Info"
+    -> are o metodă statică numită "displayInfo" care primește un "languageTag" (eticheta de limbă) ca argument;
+    -> această metodă utilizează clasa "Locale" pentru a obține o localizare corespunzătoare etichetei de limbă și afișează informații despre această localizare,
+        cum ar fi țara, limba, valuta, zilele săptămânii și luniile într-un format citibil.
+
+Clasa "SetLocale"
+    -> are o metodă statică numită "setLocale" care primește un "languageTag" (eticheta de limbă) ca argument;
+    -> această metodă utilizează clasa "Locale" pentru a seta localizarea implicită și actualizează resursele de mesaje corespunzătoare localizării selectate.
+
+Clasa "LocaleExplore"
+    -> este clasa principală care conține metoda "main" și coordonează interacțiunea cu utilizatorul;
+    -> aceasta utilizează un obiect "Scanner" pentru a citi comenzile utilizatorului;
+    -> in funcție de comanda introdusă, acesta apelează metodele corespunzătoare din clasele "DisplayLocales", "SetLocale" și "Info" sau afișează un mesaj de comandă invalidă.
+
+Fișierul "Messages.properties"
+    -> conține perechile cheie-valoare pentru limba engleză;
+    -> acestea includ mesaje precum "prompt", "locales", "locale.set", "info" și "invalid".
+
+Fișierul "Messages_ro.properties"
+    -> conține perechile cheie-valoare pentru limba română;
+    -> acesta furnizează traduceri corespunzătoare pentru mesajele din limba engleză, cum ar fi "prompt", "locales", "locale.set", "info" și "invalid".
+
+Aceste fișiere de resurse sunt utilizate pentru a obține mesajele în funcție de limba setată sau selectată de utilizator.
